@@ -8,14 +8,14 @@ const { typeDefs, resolvers } = require('./schemas');
 const path = require('path');
 const multer = require('multer');
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
-const cloudinary = require('../server/config/cloudinaryConfig');
+const cloudinary = require('./config/cloudinaryConfig');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(cors({
-  origin: '*', 
-  methods: ['GET', 'POST'], 
+  origin: '*',
+  methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
@@ -57,6 +57,7 @@ const startApolloServer = async () => {
     }
   });
 
+  // Serve static files from the React app
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/dist')));
 

@@ -1,7 +1,7 @@
 // Set up mongoose connection
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/mythweaver', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://user-123:Papa7758$@clusterreps.w6x6iki.mongodb.net/?retryWrites=true&w=majority&appName=ClusterReps', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
