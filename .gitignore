@@ -20,8 +20,8 @@ node_modules
 /server/node_modules/
 
 # Build outputs
-/client/dist
-/client/dist-ssr
+# /client/dist
+# /client/dist-ssr
 
 # Package lock files
 package-lock.json
