@@ -12,7 +12,7 @@
   min-height: calc(100vh - var(--header-height));
   /* Adjust based on header height */
   padding: 20px;
-}
+} 
 
 .story-grid {
   display: grid;

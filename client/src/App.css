@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Chewy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
 * {
   box-sizing: border-box;
@@ -69,10 +70,73 @@
   /* #edb08b */
 }
 
-/* Dark theme */
+/* Cyberpunk fonts */
 [data-theme="cyberpunk"] {
-  --bg-color: #333333;
-  --text-color: #ffffff;
+  --theme-font: 'Orbitron', sans-serif;
+  --bg-color: linear-gradient(135deg, #000000 0%, #111111 50%, #0d0d0d 100%);
+  --text-color: #00ffea;
+  --container-color: rgba(255, 255, 255, 0.1);
+  --accent-container: rgba(0, 255, 255, 0.1);
+  --dark-accent: #ff007a;
+  --mid-dark-accent: #1f1f1f;
+  --button-accent: #ff007a;
+  --dk-button-accent: #f93700;
+  --header-bg: #0d0d0d;
+  --header-text: #00ffea;
+  --header-title: #ff007a;
+  --header-shadow: #00ffea;
+  --header-link-hover: #ff007a;
+  --primary-color: #ffffff;
+}
+
+/* General text styling for body and main content */
+[data-theme="cyberpunk"] body, [data-theme="cyberpunk"] .content {
+  font-family: var(--theme-font); /* Cyberpunk font */
+  background: var(--bg-color); /* Updated background */
+  color: var(--text-color); /* Neon text */
+}
+
+[data-theme="cyberpunk"] p, [data-theme="cyberpunk"] h1, [data-theme="cyberpunk"] h2, 
+[data-theme="cyberpunk"] h3, [data-theme="cyberpunk"] h4, [data-theme="cyberpunk"] h5, [data-theme="cyberpunk"] h6 {
+  color: var(--text-color); /* Set text to neon cyan */
+  text-shadow: 0px 0px 5px var(--header-shadow), 0px 0px 10px var(--button-accent); /* Glowing text */
+}
+
+/* Cyberpunk theme button and container styling */
+[data-theme="cyberpunk"] .header-button, [data-theme="cyberpunk"] button, [data-theme="cyberpunk"] .box-container {
+  color: var(--text-color); /* Neon text */
+  background-color: transparent;
+  border: 1px solid var(--button-accent);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  text-shadow: 0px 0px 8px var(--header-shadow), 0px 0px 15px var(--button-accent);
+}
+
+[data-theme="cyberpunk"] .header-button:hover, [data-theme="cyberpunk"] button:hover {
+  background-color: var(--button-accent); /* Neon pink on hover */
+  color: #0d0d0d; /* Dark text when hovered */
+  box-shadow: 0px 0px 15px var(--button-accent);
+}
+
+/* Inputs and text areas */
+[data-theme="cyberpunk"] input, [data-theme="cyberpunk"] textarea {
+  background-color: rgba(255, 255, 255, 0.1); /* Dark semi-transparent background */
+  color: var(--text-color); /* Neon text inside inputs */
+  border: 1px solid var(--button-accent); /* Neon border */
+  padding: 10px;
+  border-radius: 4px;
+}
+
+[data-theme="cyberpunk"] input::placeholder, [data-theme="cyberpunk"] textarea::placeholder {
+  color: rgba(255, 255, 255, 0.6); /* Light placeholder text */
+}
+
+[data-theme="cyberpunk"] a {
+  color: var(--text-color); /* Neon link color */
+}
+
+[data-theme="cyberpunk"] .modal {
+  background: var(--bg-color);
+  color: var(--text-color);
 }
 
 /* Fantasy theme */
@@ -81,9 +145,10 @@
   --text-color: #ffffff;
 }
 
+/* Loading and Error Styles */
 .loading-container,
 .error-container {
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -116,4 +181,101 @@
   margin-top: 20px;
   font-size: 1.5em;
   color: var(--header-title);
+}
+
+/* Background Canvas */
+.background-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -3; /* Ensure the canvas stays behind other content */
+  background: radial-gradient(circle, #1a1a1a, #0d0d0d); /* Updated background */
+}
+
+.app-layout {
+  position: relative;
+  z-index: 1;
+}
+
+
+.background-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -3; /* Test setting it high if needed */
+  background: radial-gradient(circle, #1a1a1a, #0d0d0d); /* Cyberpunk background */
+}
+
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: radial-gradient(ellipse at bottom, #0d1d31 0%, #0c0d13 100%);
+  overflow: hidden;
+}
+
+.stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 120%;
+  transform: rotate(-45deg);
+}
+
+.star {
+  --star-color: #ffffff;
+  --star-tail-length: 6em;
+  --star-tail-height: 2px;
+  --star-width: calc(var(--star-tail-length) / 6);
+  --fall-duration: 9s;
+  --tail-fade-duration: var(--fall-duration);
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--star-tail-length);
+  height: var(--star-tail-height);
+  color: var(--star-color);
+  background: linear-gradient(45deg, currentColor, transparent);
+  border-radius: 50%;
+  filter: drop-shadow(0 0 6px currentColor);
+  transform: translate3d(104em, 0, 0);
+  animation: fall var(--fall-duration) var(--fall-delay) linear infinite, 
+             tail-fade var(--tail-fade-duration) var(--fall-delay) ease-out infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translate3d(-30em, 0, 0);
+  }
+}
+
+@keyframes tail-fade {
+  0%, 50% {
+    width: var(--star-tail-length);
+    opacity: 1;
+  }
+
+  70%, 80% {
+    width: 0;
+    opacity: 0.4;
+  }
+
+  100% {
+    width: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.6;
+  }
 }

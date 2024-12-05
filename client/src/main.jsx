@@ -25,22 +25,28 @@ const router = createBrowserRouter([
           {
             path: 'myth-index',
             element: <MythIndex />
-          }, {
+          },
+          {
             path: 'user-profile',
             element: <UserProfile />
-          }, {
+          },
+          {
             path: 'story-index/:storyId',
             element: <StoryIndex />
-          }, {
+          },
+          {
             path: 'create-story',
             element: <CreateStory />
-          }, {
+          },
+          {
             path: 'about-us',
             element: <AboutUs />
-          }, {
+          },
+          {
             path: 'story-path/:storyId',
             element: <StoryPath />
-          }, {
+          },
+          {
             path: 'story-review/:storyId',
             element: <StoryReview />
           },
@@ -61,4 +67,4 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <RouterProvider router={router} />
-)
+);

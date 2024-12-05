@@ -1,22 +1,15 @@
 import './App.css';
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  createHttpLink,
-} from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-// Bring in the Outlet component which will render the proper pages conditionally on the browser's URL.
 import { Outlet } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {
-  // Get the authentication token from local storage if it exists.
   const token = localStorage.getItem('id_token');
-  // Return the headers to the context so httpLink can read them.
   return {
     headers: {
       ...headers,
@@ -26,19 +19,21 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const client = new ApolloClient({
-  // Set up our client to execute the `authLink` middleware prior to making the request to our GraphQL API.
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 
 function App() {
+  useEffect(() => {
+    // Assuming a default theme is set, you can manually test "cyberpunk" for now
+    document.documentElement.setAttribute('data-theme', 'cyberpunk');
+  }, []);
+
   return (
     <ApolloProvider client={client}>
-      {/* The Outlet component will be replaced by the proper page based on the URL. */}
       <Outlet />
     </ApolloProvider>
   );
 }
 
 export default App;
-
